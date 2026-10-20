@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EducaInvest - Aprenda & Simule</title>
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .badge-baixo { background-color: #065f46; color: #a7f3d0; }
+    .badge-medio { background-color: #854d0e; color: #fef08a; }
+    .badge-alto { background-color: #991b1b; color: #fecaca; }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background-color: #0f172a;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--accent);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .results {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .result-value {
+      font-weight: bold;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>EducaInvest</h1>
+      <p>Entenda os investimentos e simule seus rendimentos no tempo.</p>
+    </header>
+
+    <!-- GUIA DE INVESTIMENTOS -->
+    <section>
+      <h2 style="margin-bottom: 20px;">1. Conheça as Opções</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="badge badge-baixo">Risco Muito Baixo</span>
+          <h2>Poupança</h2>
+          <p>O investimento mais popular, porém com o menor rendimento. Isento de Imposto de Renda, mas muitas vezes perde para a inflação.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge badge-baixo">Risco Baixo</span>
+          <h2>CDB (100% CDI)</h2>
+          <p>Título emitido por bancos. Rende consideravelmente mais que a poupança e conta com a proteção do Fundo Garantidor de Créditos (FGC).</p>
+        </div>
+
+        <div class="card">
+          <span class="badge badge-medio">Risco Médio</span>
+          <h2>Ações / FIIs</h2>
+          <p>Torne-se sócio de empresas ou imóveis. Não há rendimento fixo garantido, variando com o mercado, mas oferece maior potencial no longo prazo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR INTERATIVO -->
+    <section>
+      <h2 style="margin-bottom: 20px;">2. Simulador de Rendimentos</h2>
+      <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <div class="form-group">
+          <label for="initial">Aporte Inicial (R$)</label>
+          <input type="number" id="initial" value="1000" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label for="monthly">Aporte Mensal (R$)</label>
+          <input type="number" id="monthly" value="200" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label for="months">Tempo (em meses)</label>
+          <input type="number" id="months" value="12" min="1" />
+        </div>
+
+        <button onclick="calculateInvestments()">Simular Ganhos</button>
+
+        <div class="results" id="results-box" style="display: none;">
+          <h3>Resultados Estimados:</h3>
+          <br />
+          <div class="result-item">
+            <span>Total Investido:</span>
+            <span id="total-invested" class="result-value">R$ 0,00</span>
+          </div>
+          <div class="result-item">
+            <span>Poupança (aprox. 6.17% a.a.):</span>
+            <span id="poupanca-result" class="result-value">R$ 0,00</span>
+          </div>
+          <div class="result-item">
+            <span>CDB (100% CDI - aprox. 10.5% a.a.):</span>
+            <span id="cdb-result" class="result-value">R$ 0,00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function calculateInvestments() {
+      const initial = parseFloat(document.getElementById('initial').value) || 0;
+      const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+      const months = parseInt(document.getElementById('months').value) || 0;
+
+      // Taxas anuais estimadas para fins educacionais
+      const annualPoupanca = 0.0617;
+      const annualCDB = 0.105;
+
+      // Converter taxas anuais para mensais
+      const monthlyPoupanca = Math.pow(1 + annualPoupanca, 1/12) - 1;
+      const monthlyCDB = Math.pow(1 + annualCDB, 1/12) - 1;
+
+      // Função de juros compostos com aportes mensais
+      function compoundInterest(rate) {
+        let total = initial;
+        for (let i = 0; i < months; i++) {
+          total = (total + monthly) * (1 + rate);
+        }
+        return total;
+      }
+
+      const totalInvested = initial + (monthly * months);
+      const totalPoupanca = compoundInterest(monthlyPoupanca);
+      const totalCDB = compoundInterest(monthlyCDB);
+
+      // Formatador de moeda BRL
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+      document.getElementById('total-invested').innerText = formatter.format(totalInvested);
+      document.getElementById('poupanca-result').innerText = formatter.format(totalPoupanca);
+      document.getElementById('cdb-result').innerText = formatter.format(totalCDB);
+
+      document.getElementById('results-box').style.display = 'block
